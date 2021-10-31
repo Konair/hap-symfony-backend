@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  php:
+    container_name: hap_php
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+      args:
+        env_file_path: ./.env
+  nginx:
+    container_name: hap_nginx
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    depends_on:
+      - php
+    ports:
+      - '80:80'
+      - '443:443'
+  mariadb:
+    image: mariadb:latest
+    container_name: hap_mariadb
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: hap_rabbitmq
+    hostname: 'rabbitmq'
+    ports:
+      - '8090:15672'
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
+    container_name: hap_elastic
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    environment:
+      - 'discovery.type=single-node'
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.15.1
+    container_name: hap_kibana
+    ports:
+      - '5601:5601'
+    depends_on:
+      - elasticsearch

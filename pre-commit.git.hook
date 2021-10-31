@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+
+/***********
+ * PHPUNIT *
+ ***********/
+echo "Running tests.. ";
+exec('./composer.phar phpunit', $phpunitOutput, $phpunitReturnCode);
+
+if ($phpunitReturnCode !== 0) {
+  // Show full output
+  echo PHP_EOL . implode(PHP_EOL, $phpunitOutput) . PHP_EOL;
+  echo "Aborting commit.." . PHP_EOL;
+  exit(1);
+}
+
+// Show summary (last line)
+echo array_pop($phpunitOutput) . PHP_EOL;
+
+/***********
+ * PHPSTAN *
+ ***********/
+echo "Running analyze.. ";
+exec('./composer.phar phpstan', $phpStanOutput, $phpStanReturnCode);
+
+if ($phpStanReturnCode !== 0) {
+  // Show full output
+  echo PHP_EOL . implode(PHP_EOL, $phpStanOutput) . PHP_EOL;
+  echo "Aborting commit.." . PHP_EOL;
+  exit(1);
+}
+
+// Show summary (last line)
+echo array_pop($phpStanOutput) . PHP_EOL;
+
+/*********
+ * PHPCS *
+ *********/
+echo "Running style check.. ";
+exec('./composer.phar phpcs', $phpCsOutput, $phpCsReturnCode);
+
+if ($phpCsReturnCode !== 0) {
+  // Show full output
+  echo PHP_EOL . implode(PHP_EOL, $phpCsOutput) . PHP_EOL;
+  echo "Aborting commit.." . PHP_EOL;
+  exit(1);
+}
+
+// Show summary (last line)
+echo array_pop($phpCsOutput) . PHP_EOL;
+
+exit(0);

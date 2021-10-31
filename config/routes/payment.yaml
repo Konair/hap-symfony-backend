@@ -1,0 +1,79 @@
+#### cart ####
+create_cart:
+  path:       /cart
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Cart\CreateCartController
+  methods:    POST|HEAD
+add_item_to_cart:
+  path:       /cart/{cartId}/item/{itemId}
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Cart\AddItemToCartController
+  methods:    PUT|HEAD
+remove_item_from_cart:
+  path:       /cart/{cartId}/item/{cartItemId}
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Cart\RemoveItemFromCartController
+  methods:    DELETE|HEAD
+modify_billing_data_on_cart:
+  path:       /cart/{cartId}/billing-data
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Cart\ModifyBillingDataController
+  methods:    PUT|HEAD
+modify_buyer_on_cart:
+  path:       /cart/{cartId}/buyer
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Cart\ModifyBuyerController
+  methods:    PUT|HEAD
+
+#### billing ####
+create_billing_data:
+  path:       /billing-data
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Billing\CreateBillingDataController
+  methods:    POST|HEAD
+modify_billing_name:
+  path:       /billing-data/{billingDataId}/name
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Billing\ModifyNameController
+  methods:    PUT|HEAD
+modify_billing_address:
+  path:       /billing-data/{billingDataId}/address
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Billing\ModifyAddressController
+  methods:    PUT|HEAD
+modify_billing_firm_name:
+  path:       /billing-data/{billingDataId}/firm-name
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Billing\ModifyFirmNameController
+  methods:    PUT|HEAD
+modify_billing_phone_number:
+  path:       /billing-data/{billingDataId}/phone-number
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Billing\ModifyPhoneNumberController
+  methods:    PUT|HEAD
+modify_billing_user_id:
+  path:       /billing-data/{billingDataId}/user-id
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Billing\ModifyUserIdController
+  methods:    PUT|HEAD
+
+#### price ####
+create_price_plan:
+  path:       /price-plan
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Price\CreatePricePlanController
+  methods:    POST|HEAD
+get_price_plan:
+  path:       /price-plan/{pricePlanId}
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Price\GetPricePlanController
+  methods:    GET|HEAD
+modify_price:
+  path:       /price-plan/{pricePlanId}/price
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Price\ModifyPriceController
+  methods:    PUT|HEAD
+modify_access_plan_to_lifetime:
+  path:       /price-plan/{pricePlanId}/access-plan/lifetime
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Price\ModifyAccessPlanToLifetimeAccessController
+  methods:    PUT|HEAD
+modify_access_plan_to_periodic:
+  path:       /price-plan/{pricePlanId}/access-plan/periodic
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Price\ModifyAccessPlanToPeriodAccessController
+  methods:    PUT|HEAD
+modify_access_plan_to_length:
+  path:       /price-plan/{pricePlanId}/access-plan/length
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Price\ModifyAccessPlanToLengthAccessController
+  methods:    PUT|HEAD
+
+#### payment ####
+payment_provider_redirect_url:
+  path:       /payment/{paymentProvider}/{cartId}/redirect-url
+  controller: Konair\HAP\Payment\Infrastructure\Http\Controller\Payment\GetPaymentProviderUrlController
+  methods:    GET|HEAD
